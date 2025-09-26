@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { Upload, Link as LinkIcon, X, Image, Video, FileText, Loader2, Camera, Plus } from 'lucide-react';
+import { Upload, Link as LinkIcon, X, Image, Video, FileText, Loader as Loader2, Camera, Plus } from 'lucide-react';
 import { sleep } from '../lib/utils';
 import { mockAnalyzeSantorini } from '../lib/fixtures';
 
