@@ -159,38 +159,38 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-25 to-indigo-50">
       <TopBar />
       
-      <main className="pt-20">
-        <div className="max-w-6xl mx-auto px-6 py-8">
+      <main className="pt-24">
+        <div className="max-w-7xl mx-auto px-6 py-12">
           {!analysisResult ? (
             <EmptyState onAnalysisComplete={handleAnalysisComplete} />
           ) : (
-            <div className="space-y-8">
+            <div className="space-y-12">
               {/* Analysis Summary */}
-              <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+              <div className="bg-white/90 backdrop-blur-md rounded-3xl border-2 border-gray-100 p-8 shadow-xl">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h2 className="text-xl font-sans font-bold tracking-tight text-gray-900 mb-2">
+                    <h2 className="text-2xl font-sans font-black tracking-tight text-gray-900 mb-3">
                       Analysis Complete
                     </h2>
-                    <p className="text-gray-600">
+                    <p className="text-lg text-gray-600">
                       Found {analysisResult.pois.length} destination{analysisResult.pois.length !== 1 ? 's' : ''} with {Math.round(analysisResult.confidence * 100)}% confidence
                     </p>
                   </div>
-                  <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-2 rounded-2xl text-base font-bold shadow-lg">
                     ✓ Ready
                   </div>
                 </div>
                 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {analysisResult.pois.map((poi, index) => (
-                    <div key={index} className="bg-gray-50 rounded-xl p-4">
-                      <h3 className="font-sans font-semibold tracking-tight text-gray-900 mb-1">
+                    <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                      <h3 className="font-sans font-bold tracking-tight text-gray-900 mb-2 text-lg">
                         {poi.name}
                       </h3>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-base text-gray-600">
                         Confidence: {Math.round(poi.confidence * 100)}%
                       </p>
                     </div>
@@ -200,17 +200,17 @@ export default function HomePage() {
 
               {/* Travel Bundles */}
               {bundles.length > 0 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-sans font-bold tracking-tight text-gray-900">
+                    <h2 className="text-3xl font-sans font-black tracking-tight text-gray-900">
                       Your Travel Options
                     </h2>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-base text-gray-500 font-sans font-medium">
                       {bundles.length} bundle{bundles.length !== 1 ? 's' : ''} found
                     </span>
                   </div>
                   
-                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
                     {bundles.map((bundle) => (
                       <ItineraryCard
                         key={bundle.id}
@@ -227,8 +227,8 @@ export default function HomePage() {
 
               {/* Loading State */}
               {isLoading && (
-                <div className="text-center py-8">
-                  <div className="inline-flex items-center space-x-2 text-blue-600">
+                <div className="text-center py-12">
+                  <div className="inline-flex items-center space-x-3 text-blue-600 text-lg">
                     <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                     <span>Processing...</span>
                   </div>
@@ -236,7 +236,7 @@ export default function HomePage() {
               )}
 
               {/* Chat Interface */}
-              <div className="max-w-3xl mx-auto">
+              <div className="max-w-4xl mx-auto">
                 <ChatComposer
                   onSend={handleChatMessage}
                   isLoading={isLoading}

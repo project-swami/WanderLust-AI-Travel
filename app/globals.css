@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 248, 250, 252;
-  --background-end-rgb: 239, 246, 255;
+  --background-start-rgb: 249, 250, 251;
+  --background-end-rgb: 243, 244, 246;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,19 +82,19 @@
 
 @layer components {
   .wanderlens-gradient {
-    @apply bg-gradient-to-r from-blue-500 to-teal-500;
+    @apply bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600;
   }
   
   .wanderlens-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg rounded-xl;
+    @apply bg-white/90 backdrop-blur-md border-2 border-gray-100 shadow-xl rounded-3xl;
   }
   
   .wanderlens-input {
-    @apply bg-white/50 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+    @apply bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all duration-200;
   }
   
   .wanderlens-button {
-    @apply wanderlens-gradient text-white font-medium px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105;
+    @apply wanderlens-gradient text-white font-bold px-8 py-4 rounded-2xl hover:shadow-xl transition-all duration-200 hover:scale-105;
   }
 }
 

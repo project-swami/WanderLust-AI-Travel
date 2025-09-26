@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { Upload, Link as LinkIcon, X, Image, Video, FileText, Loader2 } from 'lucide-react';
+import { Upload, Link as LinkIcon, X, Image, Video, FileText, Loader2, Camera, Plus } from 'lucide-react';
 import { sleep } from '../lib/utils';
 import { mockAnalyzeSantorini } from '../lib/fixtures';
 
@@ -132,14 +132,14 @@ export function MediaUploader({ onAnalysisComplete, className = '' }: MediaUploa
   const hasMedia = files.length > 0 || urlInput.trim();
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-8 ${className}`}>
       {/* Drag & Drop Area */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+      <div className="bg-white rounded-3xl border-2 border-gray-100 p-8 shadow-lg">
         <div 
-          className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ${
+          className={`border-3 border-dashed rounded-2xl p-12 text-center transition-all duration-300 ${
             isDragOver 
-              ? 'border-blue-500 bg-blue-50' 
-              : 'border-gray-300 hover:border-blue-400 hover:bg-blue-50/50'
+              ? 'border-blue-400 bg-gradient-to-br from-blue-50 to-indigo-50' 
+              : 'border-gray-200 hover:border-blue-300 hover:bg-gradient-to-br hover:from-blue-25 hover:to-indigo-25'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -154,47 +154,57 @@ export function MediaUploader({ onAnalysisComplete, className = '' }: MediaUploa
             className="hidden"
             aria-label="Upload media files"
           />
-          <Upload className={`h-12 w-12 mx-auto mb-4 ${isDragOver ? 'text-blue-500' : 'text-gray-400'}`} />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-relaxed">
+          <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center ${
+            isDragOver ? 'bg-blue-500' : 'bg-gradient-to-br from-blue-500 to-indigo-600'
+          }`}>
+            <Camera className="h-10 w-10 text-white" />
+          </div>
+          <h3 className="text-2xl font-sans font-bold tracking-tight text-gray-900 mb-3 leading-tight">
             {isDragOver ? 'Drop files here' : 'Drop files here or click to browse'}
           </h3>
-          <p className="text-gray-600 mb-4 leading-relaxed">
-            Support for JPG, PNG, MP4, MOV, PDF up to 50MB each
+          <p className="text-lg text-gray-500 mb-8 leading-relaxed max-w-md mx-auto">
+            Upload travel photos, videos, or paste URLs to get AI-powered itinerary suggestions
           </p>
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="bg-blue-500 text-white font-sans font-semibold tracking-tight px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-sans font-bold tracking-tight px-8 py-4 rounded-2xl hover:shadow-xl hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             type="button"
           >
-            Choose Files
+            <span className="flex items-center space-x-2">
+              <Plus className="h-5 w-5" />
+              <span>Choose Files</span>
+            </span>
           </button>
+          <p className="text-sm text-gray-400 mt-4">
+            JPG, PNG, MP4, MOV, PDF up to 50MB each
+          </p>
         </div>
 
         {/* URL Input Form */}
-        <div className="mt-6 pt-6 border-t border-gray-100">
-          <label htmlFor="url-input" className="block font-sans font-semibold tracking-tight text-gray-900 mb-3">
+        <div className="mt-8 pt-8 border-t border-gray-100">
+          <label htmlFor="url-input" className="block font-sans font-bold tracking-tight text-gray-900 mb-4 text-lg">
             Or paste a URL
           </label>
-          <form onSubmit={handleUrlAdd} className="flex space-x-3">
+          <form onSubmit={handleUrlAdd} className="flex space-x-4">
             <input
               id="url-input"
               type="url"
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="https://example.com/travel-photo.jpg"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="flex-1 px-6 py-4 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-blue-400 transition-all duration-200 text-lg"
               aria-describedby="url-help"
             />
             <button
               type="submit"
               disabled={!urlInput.trim()}
-              className="bg-gray-100 text-gray-700 font-sans font-semibold tracking-tight px-4 py-3 rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 font-sans font-bold tracking-tight px-6 py-4 rounded-2xl hover:from-gray-200 hover:to-gray-300 transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
               aria-label="Add URL"
             >
               <LinkIcon className="h-5 w-5" />
             </button>
           </form>
-          <p id="url-help" className="text-xs text-gray-500 mt-2">
+          <p id="url-help" className="text-sm text-gray-400 mt-3">
             Paste a link to an image, video, or travel blog post
           </p>
         </div>
